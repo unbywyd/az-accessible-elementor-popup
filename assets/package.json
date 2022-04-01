@@ -1,0 +1,67 @@
+{
+  "name": "tt-accessibility",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "devDependencies": {
+    "@babel/core": "^7.17.5",
+    "@babel/plugin-transform-object-assign": "^7.16.7",
+    "@babel/plugin-transform-runtime": "^7.17.0",
+    "@babel/plugin-transform-shorthand-properties": "^7.16.7",
+    "@babel/polyfill": "^7.7.0",
+    "@babel/preset-env": "^7.16.11",
+    "@babel/runtime": "^7.17.2",
+    "autoprefixer": "^10.4.2",
+    "babel-loader": "^8.2.3",
+    "babelify": "^10.0.0",
+    "core-js": "^3.21.1",
+    "css-loader": "^6.7.1",
+    "css-minimizer-webpack-plugin": "^3.4.1",
+    "ejs": "^3.1.6",
+    "es3ify-webpack-plugin": "^0.1.0",
+    "fs-extra": "^10.0.1",
+    "json-loader": "^0.5.7",
+    "mini-css-extract-plugin": "^2.6.0",
+    "postcss-loader": "^6.2.1",
+    "postcss-rtl": "^1.7.3",
+    "raw-loader": "^4.0.2",
+    "rtlcss": "^3.5.0",
+    "sass": "^1.49.9",
+    "sass-loader": "^12.6.0",
+    "style-loader": "^3.3.1",
+    "terser-webpack-plugin": "^5.3.1",
+    "webpack": "^5.70.0",
+    "webpack-cli": "^4.9.2",
+    "webpack-dev-server": "^4.7.4",
+    "yaml-loader": "^0.6.0"
+  },
+  "browserslist": {
+    "production": [
+      "last 120 version",
+      ">.1%",
+      "IE 7",
+      "IE 8",
+      "IE 9",
+      "IE 11"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version",
+      "last 1 ie version"
+    ]
+  },
+  "scripts": {
+    "dev": "title NAGISHUT CLIENT && webpack serve --mode development --env dev --open /",
+    "build": "webpack --mode production --env production",
+    "dev-build": "webpack --mode development"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@babel/plugin-transform-react-jsx": "^7.17.3",
+    "@babel/preset-react": "^7.16.7",
+    "preact": "^10.6.6",
+    "preact-global-state": "^1.0.4"
+  }
+}
