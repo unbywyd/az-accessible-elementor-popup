@@ -1,7 +1,7 @@
 === Accessible Elements popups by Accessibility Zone ===
 Contributors: unbywyd
 Donate link: https://unbywyd.com/
-Tags: Twig, shortcodes, mixcode
+Tags: Elementor, Popup, Accessibility, AccessibilityZone
 Requires at least: 4.0
 Tested up to: 5.9
 Stable tag: 1.0.0

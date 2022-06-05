@@ -18,7 +18,7 @@
 define('AZ_AELP_DIR', plugin_dir_path(__FILE__));
 define('AZ_AELP_URL', plugin_dir_url(__FILE__));
 
-define('AZ_AELP_DEV_MODE', true);
+define('AZ_AELP_DEV_MODE', false);
 
 class AZ_ACCESSIBLE_ELEMENTOR_POPUPS
 {

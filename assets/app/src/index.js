@@ -1,13 +1,39 @@
+// @ts-check
+
 import "./style.scss";
 
 (function ($) {
-    let app = function (instance) {
-        this.i = instance;
+    let az_i18n = 'az_i18n' in window ? window['az_i18n'] : {
+        close: 'close'
     }
-    app.prototype.show = function () {
+    /**
+     * @typedef {string} PopupId
+     */
+
+    /**
+     * @type {Map<PopupId, Object>}
+     */
+    let popups = new Map();
+
+    /**
+     * @constructor
+     * @param {PopupId} id 
+     */
+    let app = function (id) {
+        this.$el = $('#' + 'elementor-popup-modal-' + id);
+        this.id = id;
+    }
+
+    /**
+     * trigger when popup is shown
+     */
+    app.prototype.show = function () {       
+        /**
+         * @type {Element}
+         */ 
         this.$trigger = document.activeElement;
-        this.$el = this.i.$element;
-        let $widget = this.$el.closest('.dialog-widget');
+        
+        let $widget = this.$el;
         $widget.attr('role', 'dialog');
         $widget.attr('aria-modal', true);
         this.$widget = $widget;
@@ -21,20 +47,20 @@ import "./style.scss";
         let $closeBtn = $widget.find('.dialog-close-button');
         if ($closeBtn.length) {
             $closeBtn.attr('tabindex', 0).attr('role', 'button');
-            $closeBtn.find('i').attr('aria-label', az_i18n.close);
+            $closeBtn.find('i').attr('aria-label', az_i18n.close).removeAttr('aria-hidden');
+            $closeBtn.find('i').attr('aria-hidden', true);
             $closeBtn.prependTo($widget.find('.dialog-widget-content'));
             $closeBtn.focus();
             $closeBtn.addClass('az-popup-close-btn');
             this.$firstEl = $closeBtn;
-            this.closeHandler = function (e) {
+            /**
+             *  
+             * @param {KeyboardEvent} event 
+             */
+            this.onCloseHandler = function(event) {
                 if (!$closeBtn.length) return
-                if (e.keyCode == 27) {
-                    e.preventDefault();
-                    $closeBtn.click();
-                }
-
-                if ((e.keyCode == 13 || e.keyCode == 32) && e.target == $closeBtn[0]) {
-                    e.preventDefault();
+                if (event.code === 'Escape' || ((event.code === "Enter" || event.code === "Space") && event.target == $closeBtn[0])) {
+                    event.preventDefault();
                     $closeBtn.click();
                 }
             }
@@ -44,31 +70,36 @@ import "./style.scss";
             this.$firstEl = $widget;
         }
 
-
         this.hideDOM();
         this.focusTrap();
         this.subscribeEvents();
     }
+    /**
+     * Subscripe events
+     */
     app.prototype.subscribeEvents = function () {
-        if (this.closeHandler) {
-            $(document).on('keydown', this.closeHandler);
+        if ('function' === typeof this.onCloseHandler) {
+            $(document).on('keydown', this.onCloseHandler);
         }
-        if (this.tabHandler) {
-            $(document).on('keydown', this.tabHandler);
+        if ('function' === typeof this.onKeyboardTabTrapEvent) {
+            $(document).on('keydown', this.onKeyboardTabTrapEvent);
         }
-        if (this.tabHandler2) {
-            $(document).on('focus', '*', this.tabHandler2);
+        if ('function' === typeof this.onFocusEvent) {
+            $(document).on('focus', '*', this.onFocusEvent);
         }
     }
+    /**
+     * Unsubscribe events
+     */
     app.prototype.unsubscribeEvents = function () {
-        if (this.closeHandler) {
-            $(document).off('keydown', this.closeHandler);
+        if ('function' === typeof this.onCloseHandler) {
+            $(document).off('keydown', this.onCloseHandler);
         }
-        if (this.tabHandler) {
-            $(document).off('keydown', this.tabHandler);
+        if ('function' === typeof this.onKeyboardTabTrapEvent) {
+            $(document).off('keydown', this.onKeyboardTabTrapEvent);
         }
-        if (this.tabHandler2) {
-            $(document).off('focus', '*', this.tabHandler2);
+        if ('function' === typeof this.onFocusEvent) {
+            $(document).off('focus', '*', this.onFocusEvent);
         }
     }
 
@@ -83,31 +114,42 @@ import "./style.scss";
 
         let firstEl = this.$firstEl[0], lastEl = this.$lastEl[0];
         let $widget = this.$widget;
-        this.tabHandler2 = function (e) {
+
+        /**
+         * If the active focus is outside the popup then return focus to first element
+         * @param {FocusEvent} event
+         */
+        this.onFocusEvent = function (event) {
             if (!$widget[0].contains(document.activeElement)) {
-                e.preventDefault();
+                event.preventDefault();
                 firstEl.focus();
             }
         }
-        this.tabHandler = function (e) {
-            if (e.keyCode == 9) {
+        /**
+         * 
+         * @param {KeyboardEvent}  event
+         */
+        this.onKeyboardTabTrapEvent = function (event) {
+            if (event.code === "Tab") {
                 let activeEl = document.activeElement;
-
                 if (!$widget[0].contains(activeEl)) {
-                    e.preventDefault();
+                    event.preventDefault();
                     firstEl.focus();
                 } else {
-                    if (activeEl == firstEl && e.shiftKey) {
-                        e.preventDefault();
+                    if (activeEl == firstEl && event.shiftKey) {
+                        event.preventDefault();
                         lastEl.focus();
-                    } else if (activeEl == lastEl && !e.shiftKey) {
-                        e.preventDefault();
+                    } else if (activeEl == lastEl && !event.shiftKey) {
+                        event.preventDefault();
                         firstEl.focus();
                     }
                 }
             }
         }
     }
+    /**
+     * Hide DOM method when popup is shown
+     */
     app.prototype.hideDOM = function () {
         let self = this;
         $('body > *').each(function () {
@@ -117,32 +159,47 @@ import "./style.scss";
                     $(this).attr('data-az-sr-hidden-el', true);
                     $(this).attr('aria-hidden', true);
                 }
-
             }
         });
     }
+    /**
+     * Restore DOM when the popup is closed
+     */
     app.prototype.restoreDOM = function () {
         $('[data-az-sr-hidden-el]').each(function () {
             $(this).removeAttr('aria-hidden').removeAttr('data-az-sr-hidden-el');
         });
     }
+
     app.prototype.hide = function () {
         this.restoreDOM();
         this.unsubscribeEvents();
-        if (this.$trigger) {
+        if (this.$trigger instanceof HTMLElement) {
             this.$trigger.focus();
         }
     }
-    $(document).on('elementor/popup/show', (e, id, instance) => {
-        if (!instance.az_instance) {
-            instance.az_instance = new app(instance);
-        }
-        instance.az_instance.show();
-    });
-    $(document).on('elementor/popup/hide', (e, id, instance) => {
-        if (instance.az_instance) {
-            instance.az_instance.hide();
-        }
-    });
 
-})(jQuery);
+    /**
+     * @param {*} event
+     * @param {PopupId} id
+     */
+    function onShowPopup(event, id) {
+        if (!popups.has(id)) {
+            popups.set(id, new app(id));
+        }
+        popups.get(id).show();
+    }
+    $(document).on('elementor/popup/show', onShowPopup);
+
+    /**
+     * @param {*} event - Event
+     * @param {PopupId} id - Popup ID
+     */
+    function onHidePopup(event, id) {
+        if (popups.has(id)) {
+            popups.get(id).hide();
+        }
+    }
+    $(document).on('elementor/popup/hide', onHidePopup);
+
+})(window['jQuery'] || {});
