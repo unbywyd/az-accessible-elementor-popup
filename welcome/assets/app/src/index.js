@@ -48,8 +48,6 @@ import { useEffect, useRef, useState } from "preact/hooks";
                 'x-language': document.documentElement.getAttribute('lang').split('-')[0] || 'en'
             },
             body: JSON.stringify(state)
-        }).then(e => {
-            console.log(e);
         });
     }
     let Popup = function () {
