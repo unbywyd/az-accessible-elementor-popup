@@ -20,6 +20,13 @@ define('AZ_AELP_URL', plugin_dir_url(__FILE__));
 
 define('AZ_AELP_DEV_MODE', false);
 
+if (!class_exists('AZ_WELCOME')) {
+    require_once('welcome/app.php');
+    if (class_exists(('AZ_WELCOME'))) {
+        AZ_WELCOME::init(__FILE__);
+    }
+}
+
 class AZ_ACCESSIBLE_ELEMENTOR_POPUPS
 {
     function __construct()
@@ -29,10 +36,9 @@ class AZ_ACCESSIBLE_ELEMENTOR_POPUPS
         add_action('plugins_loaded', [$this, 'plugins_loaded']);
     }
     public function plugins_loaded()
-    {            
-        $path = dirname( plugin_basename(__FILE__)) . '/languages';
-        load_plugin_textdomain( dirname( plugin_basename(__FILE__)), false, $path );
-
+    {
+        $path = dirname(plugin_basename(__FILE__)) . '/languages';
+        load_plugin_textdomain(dirname(plugin_basename(__FILE__)), false, $path);
     }
     public function init()
     {
