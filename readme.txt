@@ -1,4 +1,4 @@
-=== Accessible Elements popups by Accessibility Zone ===
+=== Accessible Elementor popups by Accessibility Zone ===
 Contributors: unbywyd
 Donate link: https://unbywyd.com/
 Tags: Elementor, Popup, Accessibility, AccessibilityZone

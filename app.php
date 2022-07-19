@@ -7,7 +7,7 @@
  *
  * @wordpress-plugin
  * Plugin Name: Accessible Elementor popups by Accessibility Zone
- * Version:     1.0.0
+ * Version:     1.0.1
  * Description: Adds accessibility support to elementor popups
  * Author:      Unbywyd
  * Plugin URI:  https://accessibility.zone

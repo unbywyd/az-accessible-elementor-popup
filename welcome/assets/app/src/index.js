@@ -224,7 +224,7 @@ import { useEffect, useRef, useState } from "preact/hooks";
                                 {stepNumber === 1 && <fieldset>
                                     <legend>{az_welcome.t.tellus}</legend>
                                     <label className="az-welcome-popup-label sr-only" for="az-welcome-inaccessible-plugins">{az_welcome.t.about_plugins}</label>
-                                    <textarea onChange={onMessageChange} ref={textareaEl} className="az-welcome-popup-field" name="" placeholder={az_welcome.t.textarea_plr} id="az-welcome-inaccessible-plugins" cols="30" rows="5"></textarea>
+                                    <textarea onInput={onMessageChange} ref={textareaEl} className="az-welcome-popup-field" name="" placeholder={az_welcome.t.textarea_plr} id="az-welcome-inaccessible-plugins" cols="30" rows="5"></textarea>
                                 </fieldset>}
                                 {stepNumber == 0 && <fieldset>
                                     <legend id="az-welcome-legend-1">

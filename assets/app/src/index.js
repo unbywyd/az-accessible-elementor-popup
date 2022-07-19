@@ -69,7 +69,10 @@ import "./style.scss";
             $widget.focus();
             this.$firstEl = $widget;
         }
-
+        $('body').css({
+            height: '100vh',
+            overflow: 'hidden'
+        });
         this.hideDOM();
         this.focusTrap();
         this.subscribeEvents();
@@ -177,6 +180,10 @@ import "./style.scss";
         if (this.$trigger instanceof HTMLElement) {
             this.$trigger.focus();
         }
+        $('body').css({
+            height: '',
+            overflow: ''
+        });
     }
 
     /**
