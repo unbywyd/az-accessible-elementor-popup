@@ -1,5 +1,3 @@
-// @ts-check
-
 import "./style.scss";
 
 (function ($) {
@@ -208,5 +206,21 @@ import "./style.scss";
         }
     }
     $(document).on('elementor/popup/hide', onHidePopup);
+
+
+    $(window).on('elementor/frontend/init', () => {
+        if (window.elementorFrontend) {
+            window.elementorFrontend.elements.$window.on('elementor/popup/show', (event) => {
+                let id = event.originalEvent.detail.id;
+                onShowPopup(null, id);
+            });
+
+            window.elementorFrontend.elements.$window.on('elementor/popup/hide', (event) => {
+                let id = event.originalEvent.detail.id;
+                onHidePopup(null, id);
+            });
+        }
+    });
+
 
 })(window['jQuery'] || {});
