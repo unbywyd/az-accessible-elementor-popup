@@ -25,12 +25,12 @@ import "./style.scss";
     /**
      * trigger when popup is shown
      */
-    app.prototype.show = function () {       
+    app.prototype.show = function () {
         /**
          * @type {Element}
-         */ 
+         */
         this.$trigger = document.activeElement;
-        
+
         let $widget = this.$el;
         $widget.attr('role', 'dialog');
         $widget.attr('aria-modal', true);
@@ -55,7 +55,7 @@ import "./style.scss";
              *  
              * @param {KeyboardEvent} event 
              */
-            this.onCloseHandler = function(event) {
+            this.onCloseHandler = function (event) {
                 if (!$closeBtn.length) return
                 if (event.code === 'Escape' || ((event.code === "Enter" || event.code === "Space") && event.target == $closeBtn[0])) {
                     event.preventDefault();
@@ -188,13 +188,30 @@ import "./style.scss";
      * @param {*} event
      * @param {PopupId} id
      */
+
+    let debounce = function (func, wait) {
+        let timeoutId;
+
+        return function () {
+            clearTimeout(timeoutId);
+            timeoutId = setTimeout(() => {
+                func.apply(this, arguments);
+            }, wait);
+        };
+    };
+
+    const onDebounceShowPopup = debounce(onShowPopup, 100);
+    const onDebounceHidePopup = debounce(onHidePopup, 100);
+
+
     function onShowPopup(event, id) {
         if (!popups.has(id)) {
             popups.set(id, new app(id));
         }
         popups.get(id).show();
     }
-    $(document).on('elementor/popup/show', onShowPopup);
+    $(document).on('elementor/popup/show', onDebounceShowPopup);
+
 
     /**
      * @param {*} event - Event
@@ -205,22 +222,28 @@ import "./style.scss";
             popups.get(id).hide();
         }
     }
-    $(document).on('elementor/popup/hide', onHidePopup);
+    $(document).on('elementor/popup/hide', onDebounceHidePopup);
 
 
     $(window).on('elementor/frontend/init', () => {
         if (window.elementorFrontend) {
             window.elementorFrontend.elements.$window.on('elementor/popup/show', (event) => {
-                let id = event.originalEvent.detail.id;
-                onShowPopup(null, id);
+                if (event?.originalEvent?.detail?.id) {
+                    let id = event.originalEvent.detail.id;
+                    onDebounceShowPopup(null, id);
+                }
             });
 
             window.elementorFrontend.elements.$window.on('elementor/popup/hide', (event) => {
-                let id = event.originalEvent.detail.id;
-                onHidePopup(null, id);
+                if (event?.originalEvent?.detail?.id) {
+                    let id = event.originalEvent.detail.id;
+                    onDebounceHidePopup(null, id);
+                }
             });
         }
     });
 
-
 })(window['jQuery'] || {});
+
+
+
