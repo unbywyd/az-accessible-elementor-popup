@@ -1,0 +1,153 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: 2022-06-06 20:23+0300\n"
+"PO-Revision-Date: 2022-06-06 21:03+0300\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: he_IL\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=(n==1 ? 0 : n==2 ? 1 : n>10 && n%10==0 ? "
+"2 : 3);\n"
+"X-Generator: Poedit 3.0.1\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-KeywordsList: __\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: assets/node_modules\n"
+
+#: app.php:42
+msgid "Close"
+msgstr "לסגור"
+
+#: app.php:43
+msgid ""
+"<u>Only together</u> we can make web content <br /> more <b>accessible</b> "
+"to everyone!"
+msgstr "<u>רק ביחד</u> נוכל לעשות את האינטרנט <br /> <b>נגיש</b> יותר!"
+
+#: app.php:44
+msgid ""
+"Just a couple of steps and you <u>will contribute to web accessibility!</u>"
+msgstr "רק כמה שלבים כדי לעשות את זה"
+
+#: app.php:45
+msgid "Thank you!"
+msgstr "תודה רבה לך!"
+
+#: app.php:46
+msgid "Thank you for making the Internet accessible to everyone!"
+msgstr "תודה שהפכת את האינטרנט לנגיש לכולם!"
+
+#: app.php:47
+msgid ""
+"Do you have accessibility issues or questions? We can help you! The <a "
+"target=\"_blank\" href=\"https://accessibility.zone/\"><b>Accessibility "
+"Zone</b></a> team is always <u>ready to help you</u> with web accessibility, "
+"just <a href=\"https://accessibility.zone/contact-us\">contact us!</a>"
+msgstr ""
+"יש לך בעיות נגישות או שאלות? אנחנו יכולים לעזור לך! צוות <a target=\"_blank"
+"\" href=\"https://accessibility.zone/\"><b>Accessibility Zone</b></a> תמיד "
+"<u>מוכן לעזור לכם</u> עם האינטרנט נגישות, פשוט <a href=\"https://"
+"accessibility.zone/contact-us\">צור קשר!</a>"
+
+#: app.php:48
+msgid "Contact Us"
+msgstr "צור קשר"
+
+#: app.php:49
+msgid "Callback"
+msgstr "משוב"
+
+#: app.php:50
+msgid "Would you like to get in touch with us and receive news from us?"
+msgstr "האם רוצה שנודיע לך ונעדכן אותך בחדשות?"
+
+#: app.php:51
+msgid "Your email"
+msgstr "האימייל שלך"
+
+#: app.php:52
+msgid "Your e-mail"
+msgstr "האימייל שלך"
+
+#: app.php:53
+msgid "Tell us which wordpress plugins need web accessibility"
+msgstr "ספר לנו אילו תוספים של וורדפרס צריכים נגישות לאינטרנט"
+
+#: app.php:54
+msgid "About inaccessible plugins"
+msgstr "לגבי תוספים לא נגישים"
+
+#: app.php:55
+msgid "The plugin I'm using and it's not accessible"
+msgstr "התוסף שאני משתמש בו והוא לא נגיש"
+
+#: app.php:56
+msgid "Are you a developer?"
+msgstr "האם את/ה מפתח?"
+
+#: app.php:57
+msgid "Yes"
+msgstr "כן"
+
+#: app.php:58
+msgid "No"
+msgstr "לא"
+
+#: app.php:59
+msgid "To back"
+msgstr "לחזור"
+
+#: app.php:60
+msgid "I'm not interested in anything, close this popup!"
+msgstr "אני לא מעוניין בכלום, סגור את פופאפ הזה!"
+
+#: app.php:61
+msgid "Send"
+msgstr "שלח"
+
+#: app.php:62
+msgid "Skip"
+msgstr "לדלג"
+
+#: app.php:63
+msgid "Next ➝"
+msgstr "הבא "
+
+#: app.php:64
+msgid "Skip and finish"
+msgstr "דלג וסיים"
+
+#: assets/app/dist/index.min.js:2
+msgid "check"
+msgstr "לבדוק"
+
+#: assets/app/dist/index.min.js:2
+msgid "prepare"
+msgstr ""
+
+#: assets/app/dist/index.min.js:2
+msgid "ready"
+msgstr ""
+
+#: assets/app/dist/index.min.js:2
+msgid "abort"
+msgstr ""
+
+#: assets/app/dist/index.min.js:2
+msgid "dispose"
+msgstr ""
+
+#: assets/app/dist/index.min.js:2
+msgid "apply"
+msgstr ""
+
+#: assets/app/dist/index.min.js:2
+msgid "fail"
+msgstr ""
+
+#: assets/app/dist/index.min.js:2
+msgid "idle"
+msgstr ""
